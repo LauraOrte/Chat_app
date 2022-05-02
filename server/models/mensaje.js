@@ -15,15 +15,15 @@ const MensajeSchema = new Schema({
     mensaje: {
         type: String,
         required: true
-    },
-  
-
+    }
+    },{
+        timestamps: true
+   
 });
 
-UsuarioSchema.method('toJSON', function() {
-    const { __v, _id, password, ...object } = this.toObject();
-    object.uid = _id;
+MensajeSchema.method('toJSON', function() {
+    const { __v, password, ...object } = this.toObject();
     return object;
 });
 
-module.exports = model('Usuario', UsuarioSchema);
+module.exports = model('Mensaje', MensajeSchema);
