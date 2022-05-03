@@ -37,8 +37,9 @@ class Server {
         // Parseo del body
         this.app.use( express.json());
 
-        //API ENDPoints
+        //API END Points
         this.app.use('/api/login', require('../router/auth'));
+        this.app.use('/api/mensajes', require('../router/mensajes'));
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase
