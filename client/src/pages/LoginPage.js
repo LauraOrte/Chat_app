@@ -2,12 +2,15 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { ToastContainer, toast } from 'react-toastify';
+import { AuthContext } from '../auth/AuthContext';
 
 export const LoginPage = () => {
 
+  const { login } = useContext( AuthContext );
+
   const [form, setForm] = useState({
-    email: 'test1@gmail.com',
-    password: '123456',
+    email: 'Laura@gmail.com',
+    password: '1212121',
     rememberme: false
   });
 
@@ -62,7 +65,11 @@ export const LoginPage = () => {
       localStorage.removeItem('email');
     }
 
+    const{ email, password } = form;
+    
     //llamar al backend
+    login( email, password );
+    
 
 
   }
