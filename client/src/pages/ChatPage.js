@@ -12,7 +12,7 @@ export const ChatPage = () => {
               <InboxPeople />
 
               {
-                (true)
+                (!true)
                 ? <Messages />
                 : <ChatSelect />
               }

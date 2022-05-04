@@ -1,94 +1,130 @@
-import React, { useContext, useState, useEffect} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { ToastContainer, toast } from 'react-toastify';
 
 export const LoginPage = () => {
- 
+
+  const [form, setForm] = useState({
+    email: 'test1212@test.com',
+    password: '1234as',
+    rememberme: false
+  });
+
+  //para poder cambiar email y password
+  const onChange = ({ target }) => {
+    const { name, value } = target;
+    setForm({
+      ...form, //mantenga esos valores
+      [name]: value //el que cambiará
+
+    })
+
+  }
 
 
 
-const onChange = () =>{
 
-}
 
-const toggleCheck = () =>{}
+  //para el check de "recordarme"
+  const toggleCheck = () => {
+    console.log('??');
+    setForm({
+      ...form,
+      rememberme: !form.rememberme //será el opuesto
+    })
 
-const onSubmit = () =>{
+  }
 
-}
 
-const todoOk = () => {};
+
+  //creo que no funciona
+  const submit = (e) => {
+    e.preventDefault()  
+
+    console.log("!!!!!!!!!!!", form);
+
+
+
+  }
+
+
+ const todoOk = () => { };
+
+
 
 
   return (
     <>
-    <FormContainer>
-      <form onSubmit={ onSubmit }>
-        <div className="brand">
-          <img src="" alt="Logo" />
-          <h1>CHAT REAL LIVE</h1>
-        </div>
-        <input 
-        type="email" 
-        placeholder="email" 
-        name="email" 
-        autoComplete="off"
-        onChange={ onChange}  
-        />
-        <input 
-        type="password" 
-        placeholder="Password" 
-        name="password" 
-        
-        autoComplete="off"
-        onChange={ onChange }
-        />
-        
-        <div className="row mb-3">
-            <div 
-                    className="col"
-                    onClick={ ()=> toggleCheck() }
+      <FormContainer >
+        <form
+          className="login100-form validate-form flex-sb flex-w"
+        >
+          <div className="brand">
+            <img src="" alt="Logo" />
+            <h1>CHAT REAL LIVE</h1>
+          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            name="email"
+            autoComplete="off"
+            value={form.email}
+            onChange={onChange}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            autoComplete="off"
+            value={form.password}
+            onChange={onChange}
+          />
+
+          <div className="row mb-3">
+            <div
+              className="col"
+              onClick={() => toggleCheck()}
             >
-                <input
-                        className="input-checkbox100"
-                        id="ckb1"
-                        type="checkbox"
-                        name="rememberme" 
-                        
-                        readOnly
-                />
-                <label className="label-checkbox100">
-                        Recordarme
-                    </label>
-              </div>
+              <input
+                className="input-checkbox100"
+                id="ckb1"
+                type="checkbox"
+                name="rememberme"
+                checked={form.rememberme}
+                readOnly
+              />
+              <label className="label-checkbox100">
+                Recordarme
+              </label>
+            </div>
 
-              <div className="col text-right">
-                      <Link to="/auth/register">
-                        Nueva cuenta?
-                    </Link>
-                    </div>
-              </div>
-      
-              <div className="container-login100-form-btn m-t-17">
-              <button 
-                    type="submit"
-                    className="login100-form-btn"
-                    disabled={ !todoOk() }
-                    >
-                      Ingresar
-              </button>
-              </div>
-              
-              
-      </form>
-      
-    </FormContainer>
-    
-    <ToastContainer />
-  </>
+            <div className="col text-right">
+              <Link to="/auth/register">
+                Nueva cuenta?
+              </Link>
+            </div>
+          </div>
 
-)
+          <div className="container-login100-form-btn m-t-17">
+            <button
+              onClick={submit}
+              className="login100-form-btn"
+              //disabled={!todoOk()}
+            >
+              Ingresar
+            </button>
+          </div>
+
+
+        </form>
+
+      </FormContainer>
+
+
+    </>
+
+  )
 };
 
 
@@ -159,4 +195,4 @@ const FormContainer = styled.div`
     }
   }
 `;
-  
+
