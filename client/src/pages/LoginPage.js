@@ -6,10 +6,24 @@ import { ToastContainer, toast } from 'react-toastify';
 export const LoginPage = () => {
 
   const [form, setForm] = useState({
-    email: 'test1212@test.com',
-    password: '1234as',
+    email: 'test1@gmail.com',
+    password: '123456',
     rememberme: false
   });
+
+  //para que se guarde email en localStorage
+  useEffect(() =>{
+    const email = localStorage.getItem('email');
+    if( email) {
+      setForm({
+        ...form,
+        email,
+        rememberme: true,
+        
+      })
+    }
+
+  }, [])
 
   //para poder cambiar email y password
   const onChange = ({ target }) => {
@@ -42,8 +56,13 @@ export const LoginPage = () => {
   const submit = (e) => {
     e.preventDefault()  
 
-    console.log("!!!!!!!!!!!", form);
+    if( form.rememberme ){
+      localStorage.setItem('email', form.email);
+    } else {
+      localStorage.removeItem('email');
+    }
 
+    //llamar al backend
 
 
   }
