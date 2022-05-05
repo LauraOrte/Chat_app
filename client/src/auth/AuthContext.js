@@ -21,7 +21,24 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password ) => {
 
       const resp = await fetchSinToken('login', { email, password }, 'POST');
-      console.log(resp);
+      
+      //autenticación válida, guardar token el el localStorage( de 24h)
+      if ( resp.ok ){
+        localStorage.setItem('token', resp.token);
+        const { usuario } = resp;
+        
+        setAuth({
+          uid: usuario.uid,
+          checking: false,
+          logged: true,
+          name: usuario.nombre,
+          email: usuario.email,
+
+        })
+      }
+    
+
+    return resp.ok;
     }
 
     const register = (nombre, email, password) =>{
@@ -38,6 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{
+        auth,
         login,
         register,
         verificaToken,

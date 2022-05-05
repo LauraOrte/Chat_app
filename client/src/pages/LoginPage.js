@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import Swal from 'sweetalert2';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../auth/AuthContext';
+
 
 export const LoginPage = () => {
 
@@ -18,13 +20,14 @@ export const LoginPage = () => {
   useEffect(() =>{
     const email = localStorage.getItem('email');
     if( email) {
-      setForm({
+      setForm( (form) => ({
         ...form,
         email,
         rememberme: true,
         
-      })
+      }));
     }
+    
 
   }, [])
 
@@ -55,8 +58,8 @@ export const LoginPage = () => {
 
 
 
-  //creo que no funciona
-  const submit = (e) => {
+  //funciona
+  const submit = async(e) => {
     e.preventDefault()  
 
     if( form.rememberme ){
@@ -67,11 +70,13 @@ export const LoginPage = () => {
 
     const{ email, password } = form;
     
-    //llamar al backend
-    login( email, password );
-    
-
-
+    const ok = await login( email, password );
+   
+    //si es false el login
+    if ( !ok ){
+      Swal.fire('Error', 'verifique el usuario y contraseña', 'error');
+    }
+  
   }
 
 
