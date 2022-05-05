@@ -80,11 +80,6 @@ export const LoginPage = () => {
   }
 
 
- const todoOk = () => { };
-
-
-
-
   return (
     <>
       <FormContainer >
@@ -141,7 +136,7 @@ export const LoginPage = () => {
             <button
               onClick={submit}
               className="login100-form-btn"
-              //disabled={!todoOk()}
+              
             >
               Ingresar
             </button>
