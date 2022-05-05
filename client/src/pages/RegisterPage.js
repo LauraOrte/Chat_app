@@ -1,25 +1,50 @@
-import React from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ToastContainer, toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+
+import { AuthContext } from '../auth/AuthContext';
 
 export const RegisterPage = () => {
 
-  const onChange = () =>{
+  const { register } = useContext( AuthContext );
+
+  const [form, setForm] = useState({
+    email: 'antonia@gmail.com',
+    password: '11111',
+    username: 'antoni'
+  });
+
+
+  const onChange = ({ target }) =>{
+    const { name, value } = target;
+    setForm({
+      ...form, //mantenga esos valores
+      [name]: value //el que cambiará
+
+    })
 
   }
 
-  const onSubmit = () =>{
+  const submit = async(e) => {
+    e.preventDefault()  
 
+    const{ email, password, username } = form;
+    
+    const msg = await register( username, email, password );
+   
+    //si es false 
+    if ( msg !== true ){
+      Swal.fire('Error', msg, 'error');
+    }
+  
   }
-
-  const todoOk = () => {};
 
 
   return (
     <>
       <FormContainer>
-        <form onSubmit={ onSubmit }>
+        <form >
           <div className="brand">
             <img src="" alt="Logo" />
             <h1>CHAT REGISTRO</h1>
@@ -29,6 +54,7 @@ export const RegisterPage = () => {
           placeholder="Username" 
           name="username" 
           autoComplete="off"
+          value={ form.username}
           onChange={ onChange }
           />
           <input 
@@ -36,6 +62,7 @@ export const RegisterPage = () => {
           placeholder="Email" 
           name="email" 
           autoComplete="off"
+          value={ form.email}
           onChange={ onChange }
           />
           <input 
@@ -43,6 +70,7 @@ export const RegisterPage = () => {
           placeholder="Password" 
           name="password" 
           autoComplete="off"
+          value={ form.password}
           onChange={ onChange }
           />
         <div className="row mb-3">
@@ -55,9 +83,9 @@ export const RegisterPage = () => {
 
         <div className="container-login100-form-btn m-t-17">
                 <button
-                    type="submit"
+                    onClick={submit}
                     className="login100-form-btn"
-                    disabled={ !todoOk() }
+                    
                 >
                     Crear cuenta
                 </button>
@@ -66,7 +94,7 @@ export const RegisterPage = () => {
         
       </FormContainer>
       
-      <ToastContainer />
+     
     </>
    
   )

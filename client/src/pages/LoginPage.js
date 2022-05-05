@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import Swal from 'sweetalert2';
-import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../auth/AuthContext';
 
 
@@ -16,7 +15,7 @@ export const LoginPage = () => {
     rememberme: false
   });
 
-  //para que se guarde email en localStorage
+  //para que se guarde email en localStorage (solo en el login)
   useEffect(() =>{
     const email = localStorage.getItem('email');
     if( email) {
