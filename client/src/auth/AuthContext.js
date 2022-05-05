@@ -118,6 +118,13 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const logout = () =>{
+      //para Salir
+      localStorage.removeItem('token');
+      setAuth({
+        checking: false,
+        logged: false,
+   
+      })
 
     }
 
