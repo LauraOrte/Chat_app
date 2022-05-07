@@ -20,7 +20,21 @@ const usuarioDesconectado = async( uid ) =>{
 
 }
 
+//conseguir todos los usuarios, primero los que estén online y luego offline
+const getUsuarios = async() =>{
+
+    const usuarios = await Usuario
+    .find()
+    .sort('-online');
+
+    return usuarios;
+
+}
+
+
 module.exports={
     usuarioConectado,
-    usuarioDesconectado
+    usuarioDesconectado,
+    getUsuarios
+    
 }
