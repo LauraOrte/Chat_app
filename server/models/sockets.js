@@ -53,6 +53,9 @@ class Sockets {
             //muestra el uid del que se ha desconectado
             socket.on('disconnect', async() =>{
                 await usuarioDesconectado( uid );
+                //mandar de nuevo, al desconectarse, quien se queda
+                this.io.emit( 'lista-usuarios', await getUsuarios() );
+
 
             })
 

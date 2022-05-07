@@ -8,14 +8,21 @@ import { SidebarChatItem } from './SidebarChatItem';
 export const Sidebar = () => {
 
     const { chatState } = useContext( ChatContext );
+    const { auth } = useContext( AuthContext );
+    //nuestro propio uid
 
+    const { uid } = auth;
 
     return (
         <div className="inbox_chat">
 
             {
-                chatState.usuarios.map( (usuario) => (
-                    <SidebarChatItem key={ usuario.uid }
+                chatState.usuarios
+                    .filter( user => user.uid !== uid)
+                    .map( (usuario) => (
+                    <SidebarChatItem 
+                        key={ usuario.uid }
+                        usuario= { usuario }
                         
                     />
                 ))
