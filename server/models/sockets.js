@@ -29,8 +29,12 @@ class Sockets {
             await usuarioConectado( uid );
 
 
+            //unir al usuario a una sala de socket.io, a una sala de chat
+            socket.join( uid );
 
 
+
+            
             // validar el JWT
             // si el token no es válido, desconectar
 
@@ -42,7 +46,11 @@ class Sockets {
             //Socket.join, uid
 
             //Escuchar cuando el cliente manda un mensaje
-            //mensaje-personal
+            socket.on('mensaje-personal', (payload) =>{
+                console.log(payload);
+            });
+            
+            
 
             //Disconnect
             //Marcar en la BD que el usuario se desconectó
