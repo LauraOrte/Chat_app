@@ -17,6 +17,14 @@ export const chatReducer = ( state, action ) =>{
 
     switch (action.type) {
 
+        case types.cerrarSesion:
+            return{
+                uid: '',
+                chatActivo: null,
+                usuarios: [],
+                mensajes: []
+            }
+
         case types.usuariosCargados:
             return {
                 ...state,
