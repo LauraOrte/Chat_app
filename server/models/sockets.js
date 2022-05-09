@@ -1,4 +1,7 @@
-const { usuarioConectado, usuarioDesconectado, getUsuarios } = require("../controllers/sockets");
+const { usuarioConectado, 
+        usuarioDesconectado, 
+        getUsuarios, 
+        grabarMensaje } = require("../controllers/sockets");
 const { comprobarJWT } = require("../helpers/jwt");
 
 class Sockets {
@@ -45,9 +48,10 @@ class Sockets {
 
             //Socket.join, uid
 
-            //Escuchar cuando el cliente manda un mensaje
-            socket.on('mensaje-personal', (payload) =>{
-                console.log(payload);
+            //Escuchar cuando el cliente manda un mensaje y que se grabe en base de datos
+            socket.on('mensaje-personal', async(payload) =>{
+                const mensaje = await grabarMensaje(payload);
+                console.log(mensaje);
             });
             
             
