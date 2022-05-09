@@ -46,13 +46,18 @@ export const SocketProvider = ({ children }) => {
 
     useEffect(()=>{
         socket?.on('mensaje-personal', (mensaje) =>{
-            console.log(mensaje);
+        
+            // dispatch de una acción
+            dispatch({
+                type: types.nuevoMensaje,
+                payload: mensaje
+            });
 
-            //TODO dispatch de una acción
+
             //TODO mover el scroll al final
         })
 
-    }, [socket]);
+    }, [socket, dispatch]);
 
 
     return (
