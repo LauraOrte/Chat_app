@@ -1,6 +1,10 @@
 import React from 'react'
+import { horaMes } from '../helpers/horaMes'
 
 export const IncomingMessages = ({ msg }) => {
+
+    horaMes(msg.createdAt);
+
   return (
     
     <div className="incoming_msg">
