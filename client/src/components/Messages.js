@@ -15,7 +15,9 @@ export const Messages = () => {
     <div className="mesgs">
 
     {/* <!-- Historia inicio --> */}
-    <div className="msg_history">
+    <div
+      id="mensajes"
+      className="msg_history">
 
         {
             chatState.mensajes.map( msg =>(
